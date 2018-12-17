@@ -282,6 +282,7 @@ class MarkdownEditor extends React.Component {
           hotkey={config.hotkey}
           switchPreview={config.editor.switchPreview}
         />
+        <div>
         <MarkdownPreview styleName={this.state.status === 'PREVIEW'
             ? 'preview'
             : 'preview--hide'
@@ -315,6 +316,10 @@ class MarkdownEditor extends React.Component {
           allowCustomCSS={config.preview.allowCustomCSS}
           lineThroughCheckbox={config.preview.lineThroughCheckbox}
         />
+        </div>
+        <div styleName='toc'>
+          TEST
+        </div>
       </div>
     )
   }
