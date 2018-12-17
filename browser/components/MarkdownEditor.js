@@ -254,71 +254,75 @@ class MarkdownEditor extends React.Component {
         onKeyDown={(e) => this.handleKeyDown(e)}
         onKeyUp={(e) => this.handleKeyUp(e)}
       >
-        <CodeEditor styleName={this.state.status === 'CODE'
-            ? 'codeEditor'
-            : 'codeEditor--hide'
-          }
-          ref='code'
-          mode='Boost Flavored Markdown'
-          value={value}
-          theme={config.editor.theme}
-          keyMap={config.editor.keyMap}
-          fontFamily={config.editor.fontFamily}
-          fontSize={editorFontSize}
-          indentType={config.editor.indentType}
-          indentSize={editorIndentSize}
-          enableRulers={config.editor.enableRulers}
-          rulers={config.editor.rulers}
-          displayLineNumbers={config.editor.displayLineNumbers}
-          scrollPastEnd={config.editor.scrollPastEnd}
-          storageKey={storageKey}
-          noteKey={noteKey}
-          fetchUrlTitle={config.editor.fetchUrlTitle}
-          enableTableEditor={config.editor.enableTableEditor}
-          onChange={(e) => this.handleChange(e)}
-          onBlur={(e) => this.handleBlur(e)}
-          spellCheck={config.editor.spellcheck}
-          enableSmartPaste={config.editor.enableSmartPaste}
-          hotkey={config.hotkey}
-          switchPreview={config.editor.switchPreview}
-        />
-        <div>
-        <MarkdownPreview styleName={this.state.status === 'PREVIEW'
-            ? 'preview'
-            : 'preview--hide'
-          }
-          style={previewStyle}
-          theme={config.ui.theme}
-          keyMap={config.editor.keyMap}
-          fontSize={config.preview.fontSize}
-          fontFamily={config.preview.fontFamily}
-          codeBlockTheme={config.preview.codeBlockTheme}
-          codeBlockFontFamily={config.editor.fontFamily}
-          lineNumber={config.preview.lineNumber}
-          indentSize={editorIndentSize}
-          scrollPastEnd={config.preview.scrollPastEnd}
-          smartQuotes={config.preview.smartQuotes}
-          smartArrows={config.preview.smartArrows}
-          breaks={config.preview.breaks}
-          sanitize={config.preview.sanitize}
-          ref='preview'
-          onContextMenu={(e) => this.handleContextMenu(e)}
-          onDoubleClick={(e) => this.handleDoubleClick(e)}
-          tabIndex='0'
-          value={this.state.renderValue}
-          onMouseUp={(e) => this.handlePreviewMouseUp(e)}
-          onMouseDown={(e) => this.handlePreviewMouseDown(e)}
-          onCheckboxClick={(e) => this.handleCheckboxClick(e)}
-          showCopyNotification={config.ui.showCopyNotification}
-          storagePath={storage.path}
-          noteKey={noteKey}
-          customCSS={config.preview.customCSS}
-          allowCustomCSS={config.preview.allowCustomCSS}
-          lineThroughCheckbox={config.preview.lineThroughCheckbox}
-        />
+        <div styleName={this.state.status === 'CODE'
+              ? 'codeEditor'
+              : 'codeEditor--hide'
+            }>
+          <CodeEditor styleName ='fill'
+            ref='code'
+            mode='Boost Flavored Markdown'
+            value={value}
+            theme={config.editor.theme}
+            keyMap={config.editor.keyMap}
+            fontFamily={config.editor.fontFamily}
+            fontSize={editorFontSize}
+            indentType={config.editor.indentType}
+            indentSize={editorIndentSize}
+            enableRulers={config.editor.enableRulers}
+            rulers={config.editor.rulers}
+            displayLineNumbers={config.editor.displayLineNumbers}
+            scrollPastEnd={config.editor.scrollPastEnd}
+            storageKey={storageKey}
+            noteKey={noteKey}
+            fetchUrlTitle={config.editor.fetchUrlTitle}
+            enableTableEditor={config.editor.enableTableEditor}
+            onChange={(e) => this.handleChange(e)}
+            onBlur={(e) => this.handleBlur(e)}
+            spellCheck={config.editor.spellcheck}
+            enableSmartPaste={config.editor.enableSmartPaste}
+            hotkey={config.hotkey}
+            switchPreview={config.editor.switchPreview}
+          />
         </div>
-        <div styleName='toc'>
-          TEST
+        <div styleName={this.state.status === 'PREVIEW'
+              ? 'preview'
+              : 'preview--hide'
+            }>
+          <div id='note-content' styleName='preview-wtoc'>
+            <MarkdownPreview styleName='fill'
+              style={previewStyle}
+              theme={config.ui.theme}
+              keyMap={config.editor.keyMap}
+              fontSize={config.preview.fontSize}
+              fontFamily={config.preview.fontFamily}
+              codeBlockTheme={config.preview.codeBlockTheme}
+              codeBlockFontFamily={config.editor.fontFamily}
+              lineNumber={config.preview.lineNumber}
+              indentSize={editorIndentSize}
+              scrollPastEnd={config.preview.scrollPastEnd}
+              smartQuotes={config.preview.smartQuotes}
+              smartArrows={config.preview.smartArrows}
+              breaks={config.preview.breaks}
+              sanitize={config.preview.sanitize}
+              ref='preview'
+              onContextMenu={(e) => this.handleContextMenu(e)}
+              onDoubleClick={(e) => this.handleDoubleClick(e)}
+              tabIndex='0'
+              value={this.state.renderValue}
+              onMouseUp={(e) => this.handlePreviewMouseUp(e)}
+              onMouseDown={(e) => this.handlePreviewMouseDown(e)}
+              onCheckboxClick={(e) => this.handleCheckboxClick(e)}
+              showCopyNotification={config.ui.showCopyNotification}
+              storagePath={storage.path}
+              noteKey={noteKey}
+              customCSS={config.preview.customCSS}
+              allowCustomCSS={config.preview.allowCustomCSS}
+              lineThroughCheckbox={config.preview.lineThroughCheckbox}
+            />
+          </div>
+          <div id='toc' styleName='toc'>
+            TOC GOES HERE
+          </div>
         </div>
       </div>
     )
