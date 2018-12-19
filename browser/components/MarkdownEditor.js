@@ -4,6 +4,7 @@ import CSSModules from 'browser/lib/CSSModules'
 import styles from './MarkdownEditor.styl'
 import CodeEditor from 'browser/components/CodeEditor'
 import MarkdownPreview from 'browser/components/MarkdownPreview'
+import TocBot from 'browser/components/TocBot'
 import eventEmitter from 'browser/main/lib/eventEmitter'
 import { findStorage } from 'browser/lib/findStorage'
 import ConfigManager from 'browser/main/lib/ConfigManager'
@@ -288,7 +289,7 @@ class MarkdownEditor extends React.Component {
               ? 'preview'
               : 'preview--hide'
             }>
-          <div id='note-content' styleName='preview-wtoc'>
+          <div className='note-content' styleName='preview-wtoc'>
             <MarkdownPreview styleName='fill'
               style={previewStyle}
               theme={config.ui.theme}
@@ -320,8 +321,10 @@ class MarkdownEditor extends React.Component {
               lineThroughCheckbox={config.preview.lineThroughCheckbox}
             />
           </div>
-          <div id='toc' styleName='toc'>
-            TOC GOES HERE
+          <div className='toc' styleName='toc'>
+            <TocBot
+              isActive={true}
+            />
           </div>
         </div>
       </div>
