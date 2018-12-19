@@ -4,6 +4,7 @@ import CSSModules from 'browser/lib/CSSModules'
 import styles from './TocBot.styl'
 import _ from 'lodash'
 import i18n from 'browser/lib/i18n'
+import tocbot from 'tocbot'
 
 class TocBot extends React.Component {
   constructor (props) {
@@ -15,9 +16,19 @@ class TocBot extends React.Component {
 
   render () {
     const { className } = this.props
-    return (
-      <h1>TOC GOES HERE!</h1>
-    )
+
+    tocbot.init({
+      // Where to render the table of contents.
+      tocSelector: '.toc',
+      // Where to grab the headings to build the table of contents.
+      contentSelector: '.note-content',
+      // Which headings to grab inside of the contentSelector element.
+      headingSelector: 'h1, h2, h3',
+    })
+    tocbot.refresh()
+
+    return (<h1>TOCBOT</h1>)
+
   }
 }
 

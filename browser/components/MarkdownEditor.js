@@ -290,6 +290,7 @@ class MarkdownEditor extends React.Component {
               : 'preview--hide'
             }>
           <div className='note-content' styleName='preview-wtoc'>
+            <h1 id='beHere'>Note be here</h1>
             <MarkdownPreview styleName='fill'
               style={previewStyle}
               theme={config.ui.theme}
@@ -320,6 +321,7 @@ class MarkdownEditor extends React.Component {
               allowCustomCSS={config.preview.allowCustomCSS}
               lineThroughCheckbox={config.preview.lineThroughCheckbox}
             />
+            <h1 id='beDone'>Note be done</h1>
           </div>
           <div className='toc' styleName='toc'>
             <TocBot
