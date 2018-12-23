@@ -461,6 +461,8 @@ export default class MarkdownPreview extends React.Component {
     eventEmitter.on('export:save-md', this.saveAsMdHandler)
     eventEmitter.on('export:save-html', this.saveAsHtmlHandler)
     eventEmitter.on('print', this.printHandler)
+
+    this.formatDocForToc()
   }
 
   componentWillUnmount () {
@@ -601,6 +603,32 @@ export default class MarkdownPreview extends React.Component {
     return theme.startsWith('solarized')
       ? `${appPath}/node_modules/codemirror/theme/solarized.css`
       : `${appPath}/node_modules/codemirror/theme/${theme}.css`
+  }
+
+  formatDocForToc () {
+    //TODO: add inner divs for TocBot here
+    var divContent = this.getWindow().document.createElement("div")
+    divContent.className = "NoteContent"
+    while (this.getWindow().document.body.firstChild){
+      divContent.appendChild(this.getWindow().document.body.firstChild)
+    }
+    
+    var divToc = this.getWindow().document.createElement("div")
+    divToc.className = "TocBot"
+
+    // Append the content wrapper to the body
+    this.getWindow().document.body.appendChild(divContent)
+    this.getWindow().document.body.appendChild(divToc)
+
+    var TocBotScript = this.getWindow().document.createElement("script")
+    TocBotScript.src = "../node_modules/tocbot/dist/tocbot.js"
+
+    var TocBotScriptRun = this.getWindow().document.createElement("script")
+    TocBotScriptRun.text = "tocbot.init({tocSelector: '.TocBot',contentSelector: '.NoteContent',headingSelector: 'h1, h2, h3',});"
+    this.getWindow().document.body.appendChild(TocBotScript)
+    this.getWindow().document.body.appendChild(TocBotScriptRun)
+
+    //console.log("done injecting")
   }
 
   rewriteIframe () {
