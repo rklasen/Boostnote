@@ -40,7 +40,8 @@ const appPath = fileUrl(
 )
 const CSS_FILES = [
   `${appPath}/node_modules/katex/dist/katex.min.css`,
-  `${appPath}/node_modules/codemirror/lib/codemirror.css`
+  `${appPath}/node_modules/codemirror/lib/codemirror.css`,
+  `${appPath}/node_modules/tocbot/dist/tocbot.css`
 ]
 
 function buildStyle (
@@ -149,6 +150,28 @@ body p {
   .clipboardButton {
     display: none
   }
+}
+
+/* For TocBot */
+
+.TocBot {
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  right: 0;
+  width: 30%;
+}
+
+.NoteContent {
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  left: 0;
+  width: 70%;
 }
 
 ${allowCustomCSS ? customCSS : ''}
@@ -462,7 +485,7 @@ export default class MarkdownPreview extends React.Component {
     eventEmitter.on('export:save-html', this.saveAsHtmlHandler)
     eventEmitter.on('print', this.printHandler)
 
-    this.formatDocForToc()
+    this.insertToc()
   }
 
   componentWillUnmount () {
@@ -605,7 +628,7 @@ export default class MarkdownPreview extends React.Component {
       : `${appPath}/node_modules/codemirror/theme/${theme}.css`
   }
 
-  formatDocForToc () {
+  insertToc () {
     //TODO: add inner divs for TocBot here
     var divContent = this.getWindow().document.createElement("div")
     divContent.className = "NoteContent"
@@ -621,11 +644,12 @@ export default class MarkdownPreview extends React.Component {
     this.getWindow().document.body.appendChild(divToc)
 
     var TocBotScript = this.getWindow().document.createElement("script")
-    TocBotScript.src = "../node_modules/tocbot/dist/tocbot.js"
+    //TocBotScript.src = "./../node_modules/tocbot/dist/tocbot.js"
+    TocBotScript.src = "https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"
 
     var TocBotScriptRun = this.getWindow().document.createElement("script")
     TocBotScriptRun.text = "tocbot.init({tocSelector: '.TocBot',contentSelector: '.NoteContent',headingSelector: 'h1, h2, h3',});"
-    this.getWindow().document.body.appendChild(TocBotScript)
+    this.getWindow().document.head.appendChild(TocBotScript)
     this.getWindow().document.body.appendChild(TocBotScriptRun)
 
     //console.log("done injecting")
