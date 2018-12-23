@@ -153,13 +153,10 @@ body p {
 }
 
 /* For TocBot */
-
 .TocBot {
-  height: 100%;
   position: fixed;
   z-index: 1;
   top: 0;
-  overflow-x: hidden;
   right: 0;
   width: 30%;
 }
@@ -171,7 +168,7 @@ body p {
   top: 0;
   overflow-x: hidden;
   left: 0;
-  width: 70%;
+  width: 60%;
 }
 
 ${allowCustomCSS ? customCSS : ''}
@@ -485,7 +482,7 @@ export default class MarkdownPreview extends React.Component {
     eventEmitter.on('export:save-html', this.saveAsHtmlHandler)
     eventEmitter.on('print', this.printHandler)
 
-    this.insertToc()
+    //this.insertToc()
   }
 
   componentWillUnmount () {
@@ -645,7 +642,7 @@ export default class MarkdownPreview extends React.Component {
 
     var TocBotScript = this.getWindow().document.createElement("script")
     //TocBotScript.src = "./../node_modules/tocbot/dist/tocbot.js"
-    TocBotScript.src = "https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"
+    TocBotScript.src = "../node_modules/tocbot/dist/tocbot.min.js"
 
     var TocBotScriptRun = this.getWindow().document.createElement("script")
     TocBotScriptRun.text = "tocbot.init({tocSelector: '.TocBot',contentSelector: '.NoteContent',headingSelector: 'h1, h2, h3',});"
@@ -819,6 +816,7 @@ export default class MarkdownPreview extends React.Component {
         mermaidRender(el, htmlTextHelper.decodeEntities(el.innerHTML), theme)
       }
     )
+    this.insertToc()
   }
 
   focus () {
